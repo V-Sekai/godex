@@ -167,6 +167,9 @@ public:
 		NOTIFICATION_ECS_ENTITY_CREATED = -5
 	};
 
+	typedef ::Space Space;
+	typedef ::Phase Phase;
+
 private:
 	static ECS *singleton;
 
@@ -734,5 +737,5 @@ void ECS::register_event() {
 	print_line("Event: " + event_name + " registered with ID: " + itos(E::event_id));
 }
 
-VARIANT_ENUM_CAST(Space)
-VARIANT_ENUM_CAST(Phase)
+VARIANT_ENUM_CAST(ECS::Space)
+VARIANT_ENUM_CAST(ECS::Phase)
