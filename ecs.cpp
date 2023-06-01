@@ -1,5 +1,6 @@
 
 #include "ecs.h"
+#include "main/main.h"
 #include <core/config/project_settings.h>
 #include <core/io/dir_access.h>
 #include <modules/gdscript/gdscript_parser.h>
@@ -175,7 +176,7 @@ void get_script_files(const String &p_path, Vector<String> &scripts) {
 }
 
 void ECS::preload_scripts() {
-	if (Engine::get_singleton()->is_project_manager_hint()) {
+	if (Engine::get_singleton()->is_project_manager_hint() || Main::is_cmdline_tool()) {
 		return;
 	}
 
