@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<class name="PipelineECS" inherits="Resource" version="4.0">
+<class name="PipelineECS" inherits="Resource" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
 	<brief_description>
 		Scripting API: Please edit XML with descriptions.
 	</brief_description>
@@ -8,31 +8,37 @@
 	<tutorials>
 	</tutorials>
 	<methods>
+		<method name="add_system_bundle">
+			<return type="void" />
+			<param index="0" name="system_bundle" type="StringName" />
+			<description>
+			</description>
+		</method>
 		<method name="insert_system">
-			<return type="void">
-			</return>
-			<argument index="0" name="system_name" type="StringName">
-			</argument>
-			<argument index="1" name="position" type="int" default="-1">
-			</argument>
+			<return type="void" />
+			<param index="0" name="system_name" type="StringName" />
 			<description>
 			</description>
 		</method>
 		<method name="remove_system">
-			<return type="void">
-			</return>
-			<argument index="0" name="system_name" type="StringName">
-			</argument>
+			<return type="void" />
+			<param index="0" name="system_name" type="StringName" />
+			<description>
+			</description>
+		</method>
+		<method name="remove_system_bundle">
+			<return type="void" />
+			<param index="0" name="system_bundle" type="StringName" />
 			<description>
 			</description>
 		</method>
 	</methods>
 	<members>
-		<member name="pipeline_name" type="StringName" setter="set_pipeline_name" getter="get_pipeline_name" default="@&quot;&quot;">
+		<member name="pipeline_name" type="StringName" setter="set_pipeline_name" getter="get_pipeline_name" default="&amp;&quot;&quot;">
 		</member>
-		<member name="systems_name" type="Array" setter="set_systems_name" getter="get_systems_name" default="[  ]">
+		<member name="system_bundles" type="PackedStringArray" setter="set_system_bundles" getter="get_system_bundles" default="PackedStringArray()">
+		</member>
+		<member name="systems_name" type="PackedStringArray" setter="set_systems_name" getter="get_systems_name" default="PackedStringArray()">
 		</member>
 	</members>
-	<constants>
-	</constants>
 </class>
