@@ -1,8 +1,6 @@
 name: Update DOC wiki
 on:
-  push:
-    branches: main
-    paths: doc_classes/*
+  workflow_call:
 
 jobs:
   wiki:

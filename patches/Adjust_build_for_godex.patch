@@ -1,0 +1,45 @@
+Subject: [PATCH] Adjust build for godex
+---
+Index: .github/actions/godot-cache/action.yml
+===================================================================
+diff --git a/.github/actions/godot-cache/action.yml b/.github/actions/godot-cache/action.yml
+--- a/.github/actions/godot-cache/action.yml	(revision 70fa4d26d71c01c8463393ed1ec0354c39c0f6c4)
++++ b/.github/actions/godot-cache/action.yml	(date 1685450966003)
+@@ -15,8 +15,8 @@
+       uses: actions/cache@v3
+       with:
+         path: ${{inputs.scons-cache}}
+-        key: ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
++        key: ${{inputs.cache-name}}-${{env.BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
+         restore-keys: |
+-          ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
+-          ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}
+-          ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}
++          ${{inputs.cache-name}}-${{env.BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
++          ${{inputs.cache-name}}-${{env.BASE_BRANCH}}-${{github.ref}}
++          ${{inputs.cache-name}}-${{env.BASE_BRANCH}}
+Index: .github/actions/godot-build/action.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.github/actions/godot-build/action.yml b/.github/actions/godot-build/action.yml
+--- a/.github/actions/godot-build/action.yml	(revision 70fa4d26d71c01c8463393ed1ec0354c39c0f6c4)
++++ b/.github/actions/godot-build/action.yml	(date 1685352724638)
+@@ -20,6 +20,8 @@
+     # actions/cache has 10 GiB limit, and GitHub runners have a 14 GiB disk.
+     # Limit to 7 GiB to avoid having the extracted cache fill the disk.
+     default: 7168
++  working-directory:
++    default: ""
+ runs:
+   using: "composite"
+   steps:
+@@ -29,6 +31,7 @@
+           SCONSFLAGS: ${{ inputs.sconsflags }}
+           SCONS_CACHE: ${{ inputs.scons-cache }}
+           SCONS_CACHE_LIMIT: ${{ inputs.scons-cache-limit }}
++      working-directory: ${{ inputs.working-directory }}
+       run: |
+         echo "Building with flags:" platform=${{ inputs.platform }} target=${{ inputs.target }} tests=${{ inputs.tests }} ${{ env.SCONSFLAGS }}
+         if [ "${{ inputs.target }}" != "editor" ]; then rm -rf editor; fi  # Ensure we don't include editor code.

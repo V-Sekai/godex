@@ -2,8 +2,12 @@
 
 Import("env")
 Import("env_modules")
+import methods
 
 env_godot_module = env_modules.Clone()
+
+if methods.using_clang(env_godot_module) or methods.using_emcc(env_godot_module):
+    env_godot_module.Append(CXXFLAGS=["-frelaxed-template-template-args"])
 
 env_godot_module.add_source_files(env.modules_sources, "*.cpp")
 env_godot_module.add_source_files(env.modules_sources, "components/*.cpp")
