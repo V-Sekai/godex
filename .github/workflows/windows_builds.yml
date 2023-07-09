@@ -1,94 +1,102 @@
 name: 🏁 Windows Builds
 
 on:
-  push:
-  pull_request:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
+  workflow_call:
 
 # Global Settings
 # SCONS_CACHE for windows must be set in the build environment
 env:
-  GODOT_BASE_BRANCH: master
-  SCONSFLAGS: platform=windows verbose=yes warnings=all werror=yes debug_symbols=no --jobs=2 module_text_server_fb_enabled=yes
+  GODOT_REF: 5222a99f5d38cd5346254cefed8f65315bca4fcb
+  SCONSFLAGS: platform=windows verbose=yes warnings=all werror=yes debug_symbols=no module_text_server_fb_enabled=true
   SCONS_CACHE_MSVC_CONFIG: true
-  SCONS_CACHE_LIMIT: 3072
+  BASE_BRANCH: "4.0"
 
 jobs:
   windows-editor:
     # Windows 10 with latest image
     runs-on: "windows-latest"
-    name: Editor (target=release_debug, tools=yes, tests=yes)
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Editor (target=editor, tests=yes)
+            cache-name: windows-editor
+            target: editor
+            tests: true
+            # Skip debug symbols, they're way too big with MSVC.
+            sconsflags: debug_symbols=no vsproj=yes
+            bin: "./bin/godot.windows.editor.x86_64.console.exe"
 
+          - name: Template (target=template_release)
+            cache-name: windows-template
+            target: template_release
+            tests: false
+            sconsflags: debug_symbols=no
     steps:
-    - name: Make dir
-      run: |
-       mkdir godot
-       mkdir modules
-       mkdir modules/godex
-
     - name: Clone godex
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
        path: modules/godex
 
     - name: Clone godot for godex
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-       repository: GodotECS/godot
-       ref: refs/heads/godex_version
+       repository: godotengine/godot
+       ref: ${{ env.GODOT_REF }}
        path: godot
 
-    # Upload cache on completion and check it out now
-    # Editing this is pretty dangerous for Windows since it can break and needs to be properly tested with a fresh cache.
-    - name: Load .scons_cache directory
-      id: windows-editor-cache
-      uses: actions/cache@v2
-      with:
-        path: ${{github.workspace}}/.scons_cache/
-        key: ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
-        restore-keys: |
-          ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
-          ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}
-          ${{github.job}}-${{env.GODOT_BASE_BRANCH}}
-
-    # Use python 3.x release (works cross platform; best to keep self contained in it's own step)
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v2
-      with:
-        # Semantic version range syntax or exact version of a Python version
-        python-version: '3.x'
-        # Optional - x64 or x86 architecture, defaults to x64
-        architecture: 'x64'
-
-    # Setup scons, print python version and scons version info, so if anything is broken it won't run the build.
-    - name: Configuring Python packages
+    - name: Apply patches
+      working-directory: godot
       run: |
-        python -c "import sys; print(sys.version)"
-        python -m pip install scons pywin32
-        python --version
-        scons --version
+        git apply ../modules/godex/patches/add_custom_iterator.patch --reject --ignore-space-change --ignore-whitespace
+        git apply ../modules/godex/patches/Adjust_build_for_godex.patch --reject --ignore-space-change --ignore-whitespace
+        git apply ../modules/godex/patches/Add_godex_additions_to_doc.patch --reject --ignore-space-change --ignore-whitespace
 
-    # We should always be explicit with our flags usage here since it's gonna be sure to always set those flags
+    - name: Commit
+      working-directory: godot
+      run: |
+        git config user.email "noone@example.com"
+        git config user.name "No one"
+        git commit -a -m "Create clean diff"
+
+    - name: Setup Godot build cache
+      uses: ./godot/.github/actions/godot-cache
+      with:
+        cache-name: ${{ matrix.cache-name }}
+      continue-on-error: true
+
+    - name: Setup python and scons
+      uses: ./godot/.github/actions/godot-deps
+
+    - name: Setup MSVC problem matcher
+      uses: ammaraskar/msvc-problem-matcher@master
+
     - name: Compilation
-      env:
-        SCONS_CACHE: ${{github.workspace}}/.scons_cache/
-      run: |
-        cd godot
-        scons tools=yes tests=yes target=release_debug custom_modules="../modules"
-        ls -l bin/
+      uses: ./godot/.github/actions/godot-build
+      with:
+        sconsflags: ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }}
+        platform: windows
+        target: ${{ matrix.target }}
+        tests: ${{ matrix.tests }}
+        working-directory: godot
 
     # Execute unit tests for the editor
-    - name: Unit Tests
+    - name: Unit tests
+      working-directory: godot
+      if: ${{ matrix.tests }}
       run: |
-        cd ./godot
-        ./bin/godot.windows.opt.tools.64.exe --test
-        cd ../
+        ${{ matrix.bin }} --version
+        ${{ matrix.bin }} --help
+        ${{ matrix.bin }} --test --headless
 
-    - uses: actions/upload-artifact@v2
+    - name: Prepare artifact
+      working-directory: godot
+      run: |
+        Remove-Item bin/* -Include *.exp,*.lib,*.pdb -Force
+
+    - name: Upload artifact
+      uses: ./godot/.github/actions/upload-artifact
       with:
-       name: ${{ github.job }}
-       path: godot/bin/*
-       retention-days: 14
-
+        name: ${{ matrix.cache-name }}
+        path: "godot/bin/*"

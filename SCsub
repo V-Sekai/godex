@@ -4,10 +4,13 @@ import methods_ecs
 
 Import("env")
 Import("env_modules")
+import methods
 
 env_ecs = env_modules.Clone()
-if env_ecs["float"] == "64":
+if env_ecs["precision"] == "double":
     env_ecs.Append(CPPDEFINES=["BT_USE_DOUBLE_PRECISION=1"])
+if methods.using_clang(env_ecs) or methods.using_emcc(env_ecs):
+    env_ecs.Append(CXXFLAGS=["-frelaxed-template-template-args"])
 
 methods_ecs.generate_system_structs()
 methods_ecs.generate_system_exe_funcs()

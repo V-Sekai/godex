@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<class name="ECS" inherits="Object" version="4.0">
+<class name="ECS" inherits="Object" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
 	<brief_description>
 		Singleton to access Godex utilities.
 	</brief_description>
@@ -9,56 +9,55 @@
 	</tutorials>
 	<methods>
 		<method name="get_active_world">
-			<return type="Node">
-			</return>
+			<return type="Node" />
 			<description>
 			</description>
 		</method>
 		<method name="get_component_id" qualifiers="const">
-			<return type="int">
-			</return>
-			<argument index="0" name="name" type="StringName">
-			</argument>
+			<return type="int" />
+			<param index="0" name="name" type="StringName" />
 			<description>
 			</description>
 		</method>
 		<method name="get_databag_id" qualifiers="const">
-			<return type="int">
-			</return>
-			<argument index="0" name="name" type="StringName">
-			</argument>
+			<return type="int" />
+			<param index="0" name="name" type="StringName" />
+			<description>
+			</description>
+		</method>
+		<method name="get_spawner_id" qualifiers="const">
+			<return type="int" />
+			<param index="0" name="name" type="StringName" />
 			<description>
 			</description>
 		</method>
 		<method name="get_system_id" qualifiers="const">
-			<return type="int">
-			</return>
-			<argument index="0" name="name" type="StringName">
-			</argument>
+			<return type="int" />
+			<param index="0" name="name" type="StringName" />
 			<description>
 			</description>
 		</method>
 		<method name="verify_component_id" qualifiers="const">
-			<return type="bool">
-			</return>
-			<argument index="0" name="name" type="int">
-			</argument>
+			<return type="bool" />
+			<param index="0" name="id" type="int" />
 			<description>
 			</description>
 		</method>
 		<method name="verify_databag_id" qualifiers="const">
-			<return type="bool">
-			</return>
-			<argument index="0" name="name" type="int">
-			</argument>
+			<return type="bool" />
+			<param index="0" name="id" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="verify_spawner_id" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="id" type="int" />
 			<description>
 			</description>
 		</method>
 		<method name="verify_system_id" qualifiers="const">
-			<return type="bool">
-			</return>
-			<argument index="0" name="name" type="int">
-			</argument>
+			<return type="bool" />
+			<param index="0" name="id" type="int" />
 			<description>
 			</description>
 		</method>
@@ -70,39 +69,171 @@
 		</constant>
 		<constant name="NOTIFICATION_ECS_WORLD_UNLOADED" value="-3">
 		</constant>
-		<constant name="NOTIFICATION_ECS_WORDL_READY" value="-4">
+		<constant name="NOTIFICATION_ECS_WORLD_READY" value="-4">
 		</constant>
 		<constant name="NOTIFICATION_ECS_ENTITY_CREATED" value="-5">
 		</constant>
-		<constant name="Child" value="0">
+		<constant name="LOCAL" value="0" enum="Space">
 		</constant>
-		<constant name="Disabled" value="1">
+		<constant name="GLOBAL" value="1" enum="Space">
 		</constant>
-		<constant name="MeshComponent" value="2">
+		<constant name="PHASE_CONFIG" value="1" enum="Phase">
 		</constant>
-		<constant name="TransformComponent" value="3">
+		<constant name="PHASE_INPUT" value="2" enum="Phase">
 		</constant>
-		<constant name="Shape3DComponent" value="4">
+		<constant name="PHASE_PRE_PROCESS" value="3" enum="Phase">
+		</constant>
+		<constant name="PHASE_PROCESS" value="4" enum="Phase">
+		</constant>
+		<constant name="PHASE_POST_PROCESS" value="5" enum="Phase">
+		</constant>
+		<constant name="PHASE_PRE_RENDER" value="7" enum="Phase">
 		</constant>
 		<constant name="WorldCommands" value="0">
 		</constant>
 		<constant name="World" value="1">
 		</constant>
-		<constant name="FrameTime" value="2">
+		<constant name="PipelineCommands" value="2">
 		</constant>
-		<constant name="OsDatabag" value="3">
+		<constant name="FrameTime" value="3">
 		</constant>
-		<constant name="EngineDatabag" value="4">
+		<constant name="BtPhysicsSpaces" value="4">
 		</constant>
-		<constant name="MessageQueueDatabag" value="5">
+		<constant name="BtCache" value="5">
 		</constant>
-		<constant name="RenderingServerDatabag" value="6">
+		<constant name="BtSpaceMarker" value="0">
 		</constant>
-		<constant name="RenderingScenarioDatabag" value="7">
+		<constant name="BtRigidBody" value="1">
 		</constant>
-		<constant name="Physics3D" value="8">
+		<constant name="BtArea" value="2">
 		</constant>
-		<constant name="InputDatabag" value="9">
+		<constant name="BtPawn" value="3">
+		</constant>
+		<constant name="BtBox" value="4">
+		</constant>
+		<constant name="BtShapeStorageBox" value="6">
+		</constant>
+		<constant name="BtSphere" value="5">
+		</constant>
+		<constant name="BtShapeStorageSphere" value="7">
+		</constant>
+		<constant name="BtCapsule" value="6">
+		</constant>
+		<constant name="BtShapeStorageCapsule" value="8">
+		</constant>
+		<constant name="BtCone" value="7">
+		</constant>
+		<constant name="BtShapeStorageCone" value="9">
+		</constant>
+		<constant name="BtCylinder" value="8">
+		</constant>
+		<constant name="BtShapeStorageCylinder" value="10">
+		</constant>
+		<constant name="BtConvex" value="9">
+		</constant>
+		<constant name="BtShapeStorageConvex" value="11">
+		</constant>
+		<constant name="BtTrimesh" value="10">
+		</constant>
+		<constant name="BtShapeStorageTrimesh" value="12">
+		</constant>
+		<constant name="BtStreamedShape" value="11">
+		</constant>
+		<constant name="OverlapStart" value="0">
+		</constant>
+		<constant name="OverlapEnd" value="1">
+		</constant>
+		<constant name="Force" value="12">
+		</constant>
+		<constant name="Torque" value="13">
+		</constant>
+		<constant name="Impulse" value="14">
+		</constant>
+		<constant name="TorqueImpulse" value="15">
+		</constant>
+		<constant name="BtConfigBody" value="0">
+		</constant>
+		<constant name="BtConfigArea" value="1">
+		</constant>
+		<constant name="BtTeleportBodies" value="2">
+		</constant>
+		<constant name="BtUpdateRigidBodyTransform" value="3">
+		</constant>
+		<constant name="BtConfigBoxShape" value="4">
+		</constant>
+		<constant name="BtConfigSphereShape" value="5">
+		</constant>
+		<constant name="BtConfigCapsuleShape" value="6">
+		</constant>
+		<constant name="BtConfigConeShape" value="7">
+		</constant>
+		<constant name="BtConfigCylinderShape" value="8">
+		</constant>
+		<constant name="BtConfigConvexShape" value="9">
+		</constant>
+		<constant name="BtConfigTrimeshShape" value="10">
+		</constant>
+		<constant name="BtApplyForces" value="11">
+		</constant>
+		<constant name="BtSpacesStep" value="12">
+		</constant>
+		<constant name="BtOverlapCheck" value="13">
+		</constant>
+		<constant name="BtPawnWalk" value="14">
+		</constant>
+		<constant name="Child" value="16">
+		</constant>
+		<constant name="Disabled" value="17">
+		</constant>
+		<constant name="MeshComponent" value="18">
+		</constant>
+		<constant name="TransformComponent" value="19">
+		</constant>
+		<constant name="InterpolatedTransformComponent" value="20">
+		</constant>
+		<constant name="Shape3DComponent" value="21">
+		</constant>
+		<constant name="SceneTreeDatabag" value="13">
+		</constant>
+		<constant name="SceneTreeInfoDatabag" value="14">
+		</constant>
+		<constant name="OsDatabag" value="15">
+		</constant>
+		<constant name="EngineDatabag" value="16">
+		</constant>
+		<constant name="MessageQueueDatabag" value="17">
+		</constant>
+		<constant name="RenderingServerDatabag" value="18">
+		</constant>
+		<constant name="RenderingScenarioDatabag" value="19">
+		</constant>
+		<constant name="Physics3D" value="20">
+		</constant>
+		<constant name="InputDatabag" value="21">
+		</constant>
+		<constant name="TimersDatabag" value="22">
+		</constant>
+		<constant name="ScenarioManagerSystem" value="15">
+		</constant>
+		<constant name="InterpolatesTransform" value="16">
+		</constant>
+		<constant name="MeshUpdaterSystem" value="17">
+		</constant>
+		<constant name="MeshTransformUpdaterSystem" value="18">
+		</constant>
+		<constant name="Physics" value="19">
+		</constant>
+		<constant name="physics_init_frame" value="20">
+		</constant>
+		<constant name="CallPhysicsProcess" value="21">
+		</constant>
+		<constant name="StepPhysicsServer3D" value="22">
+		</constant>
+		<constant name="physics_finalize_frame" value="23">
+		</constant>
+		<constant name="TimerUpdaterSystem" value="24">
+		</constant>
+		<constant name="TimerEventLauncherSystem" value="25">
 		</constant>
 	</constants>
 </class>

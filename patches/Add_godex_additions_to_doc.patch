@@ -1,0 +1,458 @@
+Subject: [PATCH] Add godex additions to doc
+---
+Index: doc/classes/Entity3D.xml
+===================================================================
+diff --git a/doc/classes/Entity3D.xml b/doc/classes/Entity3D.xml
+new file mode 100644
+--- /dev/null	(date 1685619549609)
++++ b/doc/classes/Entity3D.xml	(date 1685619549609)
+@@ -0,0 +1,64 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="Entity3D" inherits="Node3D" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="add_component">
++			<return type="void" />
++			<param index="0" name="component_name" type="StringName" />
++			<param index="1" name="values" type="Dictionary" default="{}" />
++			<description>
++			</description>
++		</method>
++		<method name="clone" qualifiers="const">
++			<return type="int" />
++			<param index="0" name="world" type="Object" />
++			<description>
++			</description>
++		</method>
++		<method name="get_component_value" qualifiers="const">
++			<return type="Variant" />
++			<param index="0" name="component" type="StringName" />
++			<param index="1" name="property" type="StringName" />
++			<param index="2" name="space" type="int" enum="ECS.Space" default="0" />
++			<description>
++			</description>
++		</method>
++		<method name="get_entity_id" qualifiers="const">
++			<return type="int" />
++			<description>
++			</description>
++		</method>
++		<method name="has_component" qualifiers="const">
++			<return type="bool" />
++			<param index="0" name="component_name" type="StringName" />
++			<description>
++			</description>
++		</method>
++		<method name="remove_component">
++			<return type="void" />
++			<param index="0" name="component_name" type="StringName" />
++			<description>
++			</description>
++		</method>
++		<method name="set_component_value">
++			<return type="bool" />
++			<param index="0" name="component" type="StringName" />
++			<param index="1" name="property" type="StringName" />
++			<param index="2" name="value" type="Variant" />
++			<param index="3" name="space" type="int" enum="ECS.Space" default="0" />
++			<description>
++			</description>
++		</method>
++	</methods>
++	<members>
++		<member name="reference_by_nodepath" type="bool" setter="set_reference_by_nodepath" getter="get_reference_by_nodepath" default="true">
++		</member>
++		<member name="sync_transform" type="bool" setter="set_sync_transform" getter="get_sync_transform" default="false">
++		</member>
++	</members>
++</class>
+Index: doc/classes/DatabagDynamicFetcher.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/DatabagDynamicFetcher.xml b/doc/classes/DatabagDynamicFetcher.xml
+new file mode 100644
+--- /dev/null	(date 1685619549564)
++++ b/doc/classes/DatabagDynamicFetcher.xml	(date 1685619549564)
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="DatabagDynamicFetcher" inherits="GodexWorldFetcher" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="is_mutable" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++		<method name="is_valid" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++	</methods>
++</class>
+Index: doc/classes/GodexWorldFetcher.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/GodexWorldFetcher.xml b/doc/classes/GodexWorldFetcher.xml
+new file mode 100644
+--- /dev/null	(date 1685619549645)
++++ b/doc/classes/GodexWorldFetcher.xml	(date 1685619549645)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="GodexWorldFetcher" inherits="Object" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++</class>
+Index: doc/classes/Entity2D.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/Entity2D.xml b/doc/classes/Entity2D.xml
+new file mode 100644
+--- /dev/null	(date 1685619549608)
++++ b/doc/classes/Entity2D.xml	(date 1685619549608)
+@@ -0,0 +1,64 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="Entity2D" inherits="Node2D" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="add_component">
++			<return type="void" />
++			<param index="0" name="component_name" type="StringName" />
++			<param index="1" name="values" type="Dictionary" default="{}" />
++			<description>
++			</description>
++		</method>
++		<method name="clone" qualifiers="const">
++			<return type="int" />
++			<param index="0" name="world" type="Object" />
++			<description>
++			</description>
++		</method>
++		<method name="get_component_value" qualifiers="const">
++			<return type="Variant" />
++			<param index="0" name="component" type="StringName" />
++			<param index="1" name="property" type="StringName" />
++			<param index="2" name="space" type="int" enum="ECS.Space" default="0" />
++			<description>
++			</description>
++		</method>
++		<method name="get_entity_id" qualifiers="const">
++			<return type="int" />
++			<description>
++			</description>
++		</method>
++		<method name="has_component" qualifiers="const">
++			<return type="bool" />
++			<param index="0" name="component_name" type="StringName" />
++			<description>
++			</description>
++		</method>
++		<method name="remove_component">
++			<return type="void" />
++			<param index="0" name="component_name" type="StringName" />
++			<description>
++			</description>
++		</method>
++		<method name="set_component_value">
++			<return type="bool" />
++			<param index="0" name="component" type="StringName" />
++			<param index="1" name="property" type="StringName" />
++			<param index="2" name="value" type="Variant" />
++			<param index="3" name="space" type="int" enum="ECS.Space" default="0" />
++			<description>
++			</description>
++		</method>
++	</methods>
++	<members>
++		<member name="reference_by_nodepath" type="bool" setter="set_reference_by_nodepath" getter="get_reference_by_nodepath" default="true">
++		</member>
++		<member name="sync_transform" type="bool" setter="set_sync_transform" getter="get_sync_transform" default="false">
++		</member>
++	</members>
++</class>
+Index: doc/classes/EventsReceiverDynamicFetcher.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/EventsReceiverDynamicFetcher.xml b/doc/classes/EventsReceiverDynamicFetcher.xml
+new file mode 100644
+--- /dev/null	(date 1685619549612)
++++ b/doc/classes/EventsReceiverDynamicFetcher.xml	(date 1685619549612)
+@@ -0,0 +1,26 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="EventsReceiverDynamicFetcher" inherits="GodexWorldFetcher" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="fetch">
++			<return type="Array" />
++			<description>
++			</description>
++		</method>
++		<method name="is_mutable" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++		<method name="is_valid" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++	</methods>
++</class>
+Index: doc/classes/EventsEmitterDynamicFetcher.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/EventsEmitterDynamicFetcher.xml b/doc/classes/EventsEmitterDynamicFetcher.xml
+new file mode 100644
+--- /dev/null	(date 1685619549611)
++++ b/doc/classes/EventsEmitterDynamicFetcher.xml	(date 1685619549611)
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="EventsEmitterDynamicFetcher" inherits="GodexWorldFetcher" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="emit">
++			<return type="void" />
++			<param index="0" name="emitter_name" type="String" />
++			<param index="1" name="data" type="Variant" default="null" />
++			<description>
++			</description>
++		</method>
++		<method name="is_mutable" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++		<method name="is_valid" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++	</methods>
++</class>
+Index: doc/classes/ComponentDynamicExposer.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/ComponentDynamicExposer.xml b/doc/classes/ComponentDynamicExposer.xml
+new file mode 100644
+--- /dev/null	(date 1685619549491)
++++ b/doc/classes/ComponentDynamicExposer.xml	(date 1685619549491)
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="ComponentDynamicExposer" inherits="Object" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="is_mutable" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++		<method name="is_valid" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++	</methods>
++</class>
+Index: doc/classes/SharedComponentResource.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/SharedComponentResource.xml b/doc/classes/SharedComponentResource.xml
+new file mode 100644
+--- /dev/null	(date 1685619549876)
++++ b/doc/classes/SharedComponentResource.xml	(date 1685619549876)
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="SharedComponentResource" inherits="Resource" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="init">
++			<return type="void" />
++			<param index="0" name="name" type="StringName" />
++			<description>
++			</description>
++		</method>
++	</methods>
++	<members>
++		<member name="component_name" type="StringName" setter="__set_component_name" getter="__get_component_name" default="&amp;&quot;&quot;">
++		</member>
++	</members>
++</class>
+Index: doc/classes/SystemBundle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/SystemBundle.xml b/doc/classes/SystemBundle.xml
+new file mode 100644
+--- /dev/null	(date 1685619549911)
++++ b/doc/classes/SystemBundle.xml	(date 1685619549911)
+@@ -0,0 +1,40 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="SystemBundle" inherits="Resource" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="_prepare" qualifiers="virtual">
++			<return type="void" />
++			<description>
++			</description>
++		</method>
++		<method name="add">
++			<return type="void" />
++			<param index="0" name="system_id" type="int" />
++			<description>
++			</description>
++		</method>
++		<method name="execute_after">
++			<return type="void" />
++			<param index="0" name="system_id" type="int" />
++			<description>
++			</description>
++		</method>
++		<method name="execute_before">
++			<return type="void" />
++			<param index="0" name="system_id" type="int" />
++			<description>
++			</description>
++		</method>
++		<method name="with_description">
++			<return type="void" />
++			<param index="0" name="desc" type="String" />
++			<description>
++			</description>
++		</method>
++	</methods>
++</class>
+Index: doc/classes/@GlobalScope.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/@GlobalScope.xml b/doc/classes/@GlobalScope.xml
+--- a/doc/classes/@GlobalScope.xml	(revision 2a10ab3000ada6bb454511ae5155d86c969b8c71)
++++ b/doc/classes/@GlobalScope.xml	(date 1685619550407)
+@@ -1462,6 +1462,8 @@
+ 		<member name="DisplayServer" type="DisplayServer" setter="" getter="">
+ 			The [DisplayServer] singleton.
+ 		</member>
++		<member name="ECS" type="ECS" setter="" getter="">
++		</member>
+ 		<member name="Engine" type="Engine" setter="" getter="">
+ 			The [Engine] singleton.
+ 		</member>
+Index: doc/classes/StorageDynamicFetcher.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/StorageDynamicFetcher.xml b/doc/classes/StorageDynamicFetcher.xml
+new file mode 100644
+--- /dev/null	(date 1685619549900)
++++ b/doc/classes/StorageDynamicFetcher.xml	(date 1685619549900)
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="StorageDynamicFetcher" inherits="GodexWorldFetcher" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<methods>
++		<method name="is_mutable" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++		<method name="is_valid" qualifiers="const">
++			<return type="bool" />
++			<description>
++			</description>
++		</method>
++	</methods>
++</class>
+Index: doc/classes/ScriptEcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doc/classes/ScriptEcs.xml b/doc/classes/ScriptEcs.xml
+new file mode 100644
+--- /dev/null	(date 1685619549864)
++++ b/doc/classes/ScriptEcs.xml	(date 1685619549864)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<class name="ScriptEcs" inherits="Object" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
++	<brief_description>
++	</brief_description>
++	<description>
++	</description>
++	<tutorials>
++	</tutorials>
++	<signals>
++		<signal name="ecs_script_reloaded">
++			<param index="0" name="path" type="String" />
++			<param index="1" name="name" type="StringName" />
++			<description>
++			</description>
++		</signal>
++	</signals>
++</class>
